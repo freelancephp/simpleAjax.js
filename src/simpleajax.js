@@ -60,7 +60,7 @@ var Ajax = {
 			})(this.settings, options),
 			ready = function () {
 				if(xhr.readyState == 4){
-					if (xhr.status == 200) {
+					if (xhr.status >= 200 && xhr.status < 300 || xhr.status === 304) {
 						// set data
 						var data = (opts.dataType == 'xml') ? xhr.responseXML : xhr.responseText;
 
