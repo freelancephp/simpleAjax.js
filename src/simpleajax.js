@@ -4,10 +4,10 @@
  * @fileOverview
  *    Cross browser ajax object for creating ajax calls.
  *    Released under MIT license.
- * @version 0.3.1
+ * @version 0.3.2
  * @author Victor Villaverde Laan
  * @link http://www.freelancephp.net/simpleajax-small-ajax-javascript-object/
- * @link https://github.com/freelancephp/SimpleAJAX
+ * @link https://github.com/freelancephp/SimpleAjax
  */
 
 /**
@@ -236,7 +236,7 @@ var SimpleAjax = {
 	 * @return {Boolean}
 	 */
 	isFunction: function (obj) {
-		return Object.prototype.toString.call( obj ) === '[object Function]';
+		return Object.prototype.toString.call(obj) === '[object Function]';
 	}
 
 };
@@ -246,5 +246,5 @@ if (!window.Ajax) {
 	 * Alias for SimpleAjax
 	 * @namespace Ajax
 	 */
-	window.Ajax = SimpleAJAX;
+	window.Ajax = SimpleAjax;
 }
