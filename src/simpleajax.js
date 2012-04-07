@@ -11,9 +11,9 @@
  */
 
 /**
- * @namespace Ajax
+ * @namespace SimpleAjax
  */
-var Ajax = {
+var SimpleAjax = {
 
 	/**
 	* @property {XMLHttpRequest|ActiveXObject}
@@ -240,3 +240,11 @@ var Ajax = {
 	}
 
 };
+
+if (!window.Ajax) {
+	/**
+	* Alias for SimpleAjax
+	* @namespace Ajax
+	*/
+	window.Ajax = SimpleAJAX;
+}
