@@ -21,8 +21,8 @@ var SimpleAjax = {
 	xhr: null,
 
 	/**
-	* @property {Object} Default ajax settings
-	*/
+	 * @property {Object} Default ajax settings
+	 */
 	settings: {
 		url: '',
 		type: 'GET',
@@ -43,10 +43,10 @@ var SimpleAjax = {
 	},
 
 	/**
-	* Ajax call
-	* @param {Object} [options] Overwrite the default settings (see ajaxSettings)
-	* @return {This}
-	*/
+	 * Ajax call
+	 * @param {Object} [options] Overwrite the default settings (see ajaxSettings)
+	 * @return {This}
+	 */
 	call: function (options) {
 		var self = this,
 			xhr = window.XMLHttpRequest ? new XMLHttpRequest() : new ActiveXObject('Microsoft.XMLHTTP'),
@@ -117,12 +117,12 @@ var SimpleAjax = {
 	},
 
 	/**
-	* Ajax GET request
-	* @param {String} url
-	* @param {String|Object} [data] Containing GET values
-	* @param {Function} [success] Callback when request was succesfull
-	* @return {This}
-	*/
+	 * Ajax GET request
+	 * @param {String} url
+	 * @param {String|Object} [data] Containing GET values
+	 * @param {Function} [success] Callback when request was succesfull
+	 * @return {This}
+	 */
 	get: function (url, data, success) {
 		if (this.isFunction(data)) {
 			success = data;
@@ -138,12 +138,12 @@ var SimpleAjax = {
 	},
 
 	/**
-	* Ajax POST request
-	* @param {String} url
-	* @param {String|Object} [data] Containing POST values
-	* @param {Function} [success] Callback when request was succesfull
-	* @return {This}
-	*/
+	 * Ajax POST request
+	 * @param {String} url
+	 * @param {String|Object} [data] Containing POST values
+	 * @param {Function} [success] Callback when request was succesfull
+	 * @return {This}
+	 */
 	post: function (url, data, success) {
 		if (this.isFunction(data)) {
 			success = data;
@@ -159,13 +159,13 @@ var SimpleAjax = {
 	},
 
 	/**
-	* Set content loaded by an ajax call
-	* @param {DOMElement|String} el Can contain an element or the id of the element
-	* @param {String} url The url of the ajax call (include GET vars in querystring)
-	* @param {String} [data] The POST data, when set method will be set to POST
-	* @param {Function} [complete] Callback when loading is completed
-	* @return {This}
-	*/
+	 * Set content loaded by an ajax call
+	 * @param {DOMElement|String} el Can contain an element or the id of the element
+	 * @param {String} url The url of the ajax call (include GET vars in querystring)
+	 * @param {String} [data] The POST data, when set method will be set to POST
+	 * @param {Function} [complete] Callback when loading is completed
+	 * @return {This}
+	 */
 	load: function (el, url, data, complete) {
 		if (typeof el == 'string')
 			el = document.getElementById(el);
@@ -195,10 +195,10 @@ var SimpleAjax = {
 	},
 
 	/**
-	* Make querystring outof object or array of values
-	* @param {Object|Array} obj Keys/values
-	* @return {String} The querystring
-	*/
+	 * Make querystring outof object or array of values
+	 * @param {Object|Array} obj Keys/values
+	 * @return {String} The querystring
+	 */
 	param: function (obj) {
 		var s = [];
 
@@ -210,10 +210,10 @@ var SimpleAjax = {
 	},
 
 	/**
-	* Parse JSON string
-	* @param {String} data
-	* @return {Object} JSON object
-	*/
+	 * Parse JSON string
+	 * @param {String} data
+	 * @return {Object} JSON object
+	 */
 	parseJSON: function (data) {
 		if (typeof data !== 'string' || !data)
 			return null;
@@ -222,19 +222,19 @@ var SimpleAjax = {
 	},
 
 	/**
-	* Trim spaces
-	* @param {String} str
-	* @return {String}
-	*/
+	 * Trim spaces
+	 * @param {String} str
+	 * @return {String}
+	 */
 	trim: function (str) {
 		return str.replace(/^\s+/, '').replace(/\s+$/, '');
 	},
 
 	/**
-	* Check if argument is function
-	* @param {Mixed} obj
-	* @return {Boolean}
-	*/
+	 * Check if argument is function
+	 * @param {Mixed} obj
+	 * @return {Boolean}
+	 */
 	isFunction: function (obj) {
 		return Object.prototype.toString.call( obj ) === '[object Function]';
 	}
@@ -243,8 +243,8 @@ var SimpleAjax = {
 
 if (!window.Ajax) {
 	/**
-	* Alias for SimpleAjax
-	* @namespace Ajax
-	*/
+	 * Alias for SimpleAjax
+	 * @namespace Ajax
+	 */
 	window.Ajax = SimpleAJAX;
 }
