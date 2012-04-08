@@ -4,7 +4,7 @@
  * @fileOverview
  *    Cross browser ajax object for creating ajax calls.
  *    Released under MIT license.
- * @version 0.3.2
+ * @version 1.0.0
  * @author Victor Villaverde Laan
  * @link http://www.freelancephp.net/simpleajax-small-ajax-javascript-object/
  * @link https://github.com/freelancephp/SimpleAjax
@@ -16,8 +16,8 @@
 var SimpleAjax = {
 
 	/**
-	* @property {XMLHttpRequest|ActiveXObject}
-	*/
+	 * @property {XMLHttpRequest|ActiveXObject}
+	 */
 	xhr: null,
 
 	/**
