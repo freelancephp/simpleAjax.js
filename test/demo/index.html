@@ -1,9 +1,9 @@
 <html>
 <head>
-	<script src="../../src/simpleajax.min.js"></script>
+	<script src="../../src/simpleajax.js"></script>
 	<script>
 		function call() {
-			Ajax.call({
+			simpleAjax({
 				url: 'ajax.html',
 				cache: false,
 				type: 'POST',
@@ -25,25 +25,25 @@
 		}
 
 		function get() {
-			Ajax.get('ajax.html', function (data) {
+			simpleAjax.get('ajax.html', function (data) {
 				alert(data);
 			})
 		}
 
 		function post() {
-			Ajax.post('ajax.html', {test: 55}, function (data) {
+			simpleAjax.post('ajax.html', {test: 55}, function (data) {
 				alert(data);
 			})
 		}
 
 		function load() {
-			Ajax.load('p1', 'ajax.html', {}, function () {
+			simpleAjax.load('p1', 'ajax.html', {}, function () {
 				document.getElementById('p1').style.backgroundColor = '#ccc';
 			});
 		}
 
 		function json() {
-			Ajax.call({
+			simpleAjax({
 				url: 'json.js',
 				dataType: 'json',
 				cache: false,
