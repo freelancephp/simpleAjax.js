@@ -1,58 +1,69 @@
-[SimpleAjax](http://www.freelancephp.net/simpleajax-small-ajax-javascript-object/) - JavaScript Object
+[simpleAjax](http://www.freelancephp.net/simpleajax-small-ajax-javascript-object/) - JavaScript Object
 ======================================================================================================
 
-SimpleAjax is a very small Ajax Javascript object (~2.4kb min).
+simpleAjax is a very small Ajax Javascript object (~2kb) with cross-browser support.
 
 
 How To Use?
 -----------
 
-Some examples:
+### Ajax call ###
+```
+simpleAjax({
+    url: 'ajax.html',
+    type: 'GET',
+    success: function (data) {
+        alert(data);
+    }
+});
+```
 
-	Ajax.call({
-		url: 'ajax.html',
-		type: 'GET',
-		success: function (data) {
-			alert(data);
-		}
-	});
+### Short calls ###
+
+There are 2 short ajax calls for GET and POST.
+
+#### GET ####
+
+```
+simpleAjax.get('ajax.html', function (data) {
+    alert(data);
+});
+```
+
+#### POST ####
+
+```
+simpleAjax.post('ajax.html', {val: 'test'}, function (data) {
+    alert(data);
+});
+```
+
+### Load Content into DOM ###
+
+With the `simpleAjax.load()` function you can directly load the response into a DOM element.
+
+```
+simpleAjax.load('contentContainer', 'ajax.html');
+```
 
 
-	Ajax.get('ajax.html', function (data) {
-		alert(data);
-	});
 
-	Ajax.post('ajax.html', {val: 'test'}, function (data) {
-		alert(data);
-	});
+Pulic API
+---------
 
-
-API
----
-
-* `Ajax.call( options )`
-* `Ajax.get( url, [data], [success] )`
-* `Ajax.post( url, [data], [success] )`
-* `Ajax.load( el, url, [data], [complete] )`
-* `Ajax.param( obj )`
-* `Ajax.parseJSON( data )`
-* `Ajax.trim( str )`
-* `Ajax.isFunction( obj )`
+* `simpleAjax( options )`
+* `simpleAjax.get( url, [data], [success] )`
+* `simpleAjax.post( url, [data], [success] )`
+* `simpleAjax.load( el, url, [data], [complete] )`
 
 
 Browser Support
 ---------------
 
-Tested on IE6+, FF, Opera, Chrome and Safari (for Windows).
+Tested on IE7+, FF, Opera, Chrome and Safari (for Windows).
 
 
 License
 -------
 
 Released under MIT license.
-
-
-Questions?
-----------
-
-If you have any questions, please ask them by using [this contactform](http://www.freelancephp.net/contact).
