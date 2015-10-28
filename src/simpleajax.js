@@ -34,45 +34,7 @@
     };
 
     /**
-     * Ajax call helper
-     * @private
-     * @param {String} url
-     * @param {String} type
-     * @param {Object} [data]
-     * @param {Function} [success]
-     * @returns {\XMLHttpRequest}
-     */
-    var call = function (url, type, data, success) {
-        if (isFunction(data)) {
-            success = data;
-            data = null;
-        }
-
-        return simpleAjax({
-            url: url,
-            type: type,
-            data: data,
-            success: success
-        });
-    };
-
-    /**
-     * Parse JSON string
-     * @private
-     * @param {String} data
-     * @return {Object} JSON object
-     */
-    var parseJSON = function (data) {
-        if (typeof data !== 'string' || !data) {
-            return null;
-        }
-
-        return eval('('+ trim(data) +')');
-    };
-
-    /**
      * Create options combined with default settings
-     * @private
      * @param {Object} options
      * @returns {Object}
      */
@@ -93,7 +55,6 @@
 
     /**
      * Make querystring outof object or array of values
-     * @private
      * @param {Object|Array} obj Keys/values
      * @return {String} The querystring
      */
@@ -109,7 +70,6 @@
     };
 
     /**
-     * @private
      * @param {String} url
      * @param {Object} params
      * @returns {String}
@@ -122,7 +82,6 @@
 
     /**
      * Trim spaces
-     * @private
      * @param {String} str
      * @return {String}
      */
@@ -132,7 +91,6 @@
 
     /**
      * Check if argument is function
-     * @private
      * @param {Mixed} obj
      * @return {Boolean}
      */
@@ -140,15 +98,24 @@
         return Object.prototype.toString.call(obj) === '[object Function]';
     };
 
+    /**
+     * Parse JSON string
+     * @param {String} data
+     * @return {Object} JSON object
+     */
+    var parseJSON = function (data) {
+        if (typeof data !== 'string' || !data) {
+            return null;
+        }
 
-   /**
-     * @namespace simpleAjax
-     *
-     * @public
+        return eval('('+ trim(data) +')');
+    };
+
+    /**
      * @param {Object} [options] Overwrite the default settings (see ajaxSettings)
      * @return {\XMLHttpRequest}
      */
-    var simpleAjax = function (options) {
+    var ajax = function (options) {
         var xhr = new XMLHttpRequest();
         var opts = createOptions(options);
         var url = opts.url;
@@ -224,72 +191,114 @@
         return xhr;
     };
 
+    /**
+     * Ajax call helper
+     * @param {String} url
+     * @param {String} type
+     * @param {Object} [data]
+     * @param {Function} [success]
+     * @returns {\XMLHttpRequest}
+     */
+    var ajaxCallHelper = function (url, type, data, success) {
+        if (isFunction(data)) {
+            success = data;
+            data = null;
+        }
+
+        return ajax({
+            url: url,
+            type: type,
+            data: data,
+            success: success
+        });
+    };
 
     /**
      * Ajax GET request
-     * @public
      * @param {String} url
      * @param {String|Object} [data] Containing GET values
      * @param {Function} [success] Callback when request was succesfull
      * @return {\XMLHttpRequest}
      */
-    simpleAjax.get = function (url, data, success) {
-        return call(url, 'GET', data, success);
+    var ajaxGet = function (url, data, success) {
+        return ajaxCallHelper(url, 'GET', data, success);
     };
 
     /**
      * Ajax POST request
-     * @public
      * @param {String} url
      * @param {String|Object} [data] Containing POST values
      * @param {Function} [success] Callback when request was succesfull
      * @return {\XMLHttpRequest}
      */
-    simpleAjax.post = function (url, data, success) {
-        return call(url, 'POST', data, success);
+    var ajaxPost = function (url, data, success) {
+        return ajaxCallHelper(url, 'POST', data, success);
     };
 
     /**
      * Set content loaded by an ajax call
-     * @public
      * @param {DOMElement|String} el Can contain an element or the id of the element
      * @param {String} url The url of the ajax call (include GET vars in querystring)
-     * @param {String} [data] The POST data, when set method will be set to POST
+     * @param {String|Object} [data] The POST data, when set method will be set to POST
      * @param {Function} [complete] Callback when loading is completed
      * @return {\XMLHttpRequest}
      */
-    simpleAjax.load = function (el, url, data, complete) {
-        if (typeof el === 'string') {
-            el = document.getElementById(el);
-        }
-
+    var ajaxLoad = function (el, url, data, complete) {
         return simpleAjax({
             url: url,
+            dataType: 'html',
             type: data ? 'POST' : 'GET',
             data: data || null,
             complete: complete || null,
             success: function (html) {
-                try {
-                    el.innerHTML = html;
-                } catch (e) {
-                    var ph = document.createElement('div');
-                    var x, max;
-
-                    ph.innerHTML = html;
-
-                    // empty element content
-                    while (el.firstChild) {
-                        el.removeChild(el.firstChild);
-                    }
-
-                    // set new html content
-                    for (x = 0, max = ph.childNodes.length; x < max; x++) {
-                        el.appendChild(ph.childNodes[x]);
-                    }
-                }
+                setHtml(el, html);
             }
         });
     };
+
+    /**
+     * Set HTML in given element
+     * @param {DOMElement|String} el
+     * @param {String} html
+     * @return {DOMElement}
+     */
+    var setHtml = function (el, html) {
+        if (typeof el === 'string') {
+            el = document.getElementById(el);
+        }
+
+        try {
+            el.innerHTML = html;
+        } catch (e) {
+            var ph = document.createElement('div');
+            var x, max;
+
+            ph.innerHTML = html;
+
+            // empty element content
+            while (el.firstChild) {
+                el.removeChild(el.firstChild);
+            }
+
+            // set new html content
+            for (x = 0, max = ph.childNodes.length; x < max; x++) {
+                el.appendChild(ph.childNodes[x]);
+            }
+        }
+
+        return el;
+    };
+
+    /**
+     * simpleAjax
+     * @public
+     */
+    var simpleAjax = ajax;
+    simpleAjax.get = ajaxGet;
+    simpleAjax.post = ajaxPost;
+    simpleAjax.load = ajaxLoad;
+    simpleAjax.parseJSON = parseJSON;
+    simpleAjax.setHtml = setHtml;
 
     // make global
     window.simpleAjax = simpleAjax;

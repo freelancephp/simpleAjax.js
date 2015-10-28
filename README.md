@@ -1,7 +1,17 @@
 [simpleAjax](http://www.freelancephp.net/simpleajax-small-ajax-javascript-object/) - JavaScript Object
 ======================================================================================================
 
-simpleAjax is a very small Ajax Javascript object (~2kb) with cross-browser support.
+simpleAjax is a very small Ajax Javascript object (<3kb) with cross-browser support.
+
+- [How To Use?](#how-to-use)
+    - [Ajax call](#ajax-call)
+    - [Short Calls](#short-calls)
+        - [POST](#post)
+        - [GET](#get)
+    - [Load Content into DOM](#load-content-into-dom)
+- [Public API](#public-api)
+- [Browser Support](#browser-support)
+- [License](#license)
 
 
 How To Use?
@@ -18,7 +28,7 @@ simpleAjax({
 });
 ```
 
-### Short calls ###
+### Short Calls ###
 
 There are 2 short ajax calls for GET and POST.
 
@@ -47,14 +57,15 @@ simpleAjax.load('contentContainer', 'ajax.html');
 ```
 
 
-
-Pulic API
+Public API
 ---------
 
 * `simpleAjax( options )`
 * `simpleAjax.get( url, [data], [success] )`
 * `simpleAjax.post( url, [data], [success] )`
 * `simpleAjax.load( el, url, [data], [complete] )`
+* `simpleAjax.parseJSON( data )`
+* `simpleAjax.setHtml( el, html )`
 
 
 Browser Support
