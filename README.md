@@ -65,7 +65,7 @@ Public API
 * `simpleAjax.post( url, [data], [success] )`
 * `simpleAjax.load( el, url, [data], [complete] )`
 * `simpleAjax.parseJSON( data )`
-* `simpleAjax.setHtml( el, html )`
+* `simpleAjax.setHtmlContent( el, html )`
 
 
 Browser Support

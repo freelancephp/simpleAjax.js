@@ -9,11 +9,10 @@
  * @link http://www.freelancephp.net/simpleajax-small-ajax-javascript-object/
  * @link https://github.com/freelancephp/SimpleAjax
  */
-!function (window) {
+!function (window, document) {
 
     'use strict';
 
-    var document = window.document;
     var ajaxSettings = {
         url: '',
         type: 'GET',
@@ -125,7 +124,7 @@
             var status = xhr.status;
             var data;
 
-            if (xhr.readyState !== 4){
+            if (xhr.readyState !== 4) {
                 return;
             }
 
@@ -237,13 +236,13 @@
 
     /**
      * Set content loaded by an ajax call
-     * @param {DOMElement|String} el Can contain an element or the id of the element
+     * @param {DOMElement|String} element Can contain an element or the selector of the element
      * @param {String} url The url of the ajax call (include GET vars in querystring)
      * @param {String|Object} [data] The POST data, when set method will be set to POST
      * @param {Function} [complete] Callback when loading is completed
      * @return {\XMLHttpRequest}
      */
-    var ajaxLoad = function (el, url, data, complete) {
+    var ajaxLoad = function (element, url, data, complete) {
         return simpleAjax({
             url: url,
             dataType: 'html',
@@ -251,20 +250,24 @@
             data: data || null,
             complete: complete || null,
             success: function (html) {
-                setHtml(el, html);
+                setHtmlContent(element, html);
             }
         });
     };
 
     /**
      * Set HTML in given element
-     * @param {DOMElement|String} el
+     * @param {DOMElement|String} element
      * @param {String} html
      * @return {DOMElement}
      */
-    var setHtml = function (el, html) {
-        if (typeof el === 'string') {
-            el = document.getElementById(el);
+    var setHtmlContent = function (element, html) {
+        var el;
+
+        if (typeof element === 'string') {
+            el = document.querySelector(element);
+        } else {
+            el = element;
         }
 
         try {
@@ -298,9 +301,9 @@
     simpleAjax.post = ajaxPost;
     simpleAjax.load = ajaxLoad;
     simpleAjax.parseJSON = parseJSON;
-    simpleAjax.setHtml = setHtml;
+    simpleAjax.setHtmlContent = setHtmlContent;
 
     // make global
     window.simpleAjax = simpleAjax;
 
-}(window);
+}(window, window.document);
