@@ -13,7 +13,7 @@
 
     'use strict';
 
-    var ajaxSettings = {
+    var defaultAjaxSettings = {
         url: '',
         type: 'GET',
         dataType: 'text', // text, html, json or xml
@@ -41,9 +41,9 @@
         var opts = {};
         var key;
 
-        for (key in ajaxSettings) {
+        for (key in defaultAjaxSettings) {
             if (typeof options[key] === 'undefined') {
-                opts[key] =  ajaxSettings[key];
+                opts[key] =  defaultAjaxSettings[key];
             } else {
                 opts[key] =  options[key];
             }
@@ -111,7 +111,7 @@
     };
 
     /**
-     * @param {Object} [options] Overwrite the default settings (see ajaxSettings)
+     * @param {Object} [options] Overwrite the default settings (see defaultAjaxSettings)
      * @return {\XMLHttpRequest}
      */
     var ajax = function (options) {
