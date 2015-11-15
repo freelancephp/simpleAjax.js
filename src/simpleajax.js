@@ -57,7 +57,7 @@
      * @param {Object|Array} obj Keys/values
      * @return {String} The querystring
      */
-    var param = function (obj) {
+    var makeQueryStringParams = function (obj) {
         var s = [];
         var key;
 
@@ -74,7 +74,7 @@
      * @returns {String}
      */
     var addToQueryString = function (url, params) {
-        var str = param(params);
+        var str = makeQueryStringParams(params);
         var newUrl = url + (url.indexOf('?') > -1 ? '&' : '?') + str;
         return newUrl;
     };
@@ -167,7 +167,7 @@
                 url = addToQueryString(url, sendData);
                 sendData = null;
             } else {
-                sendData = param(sendData);
+                sendData = makeQueryStringParams(sendData);
             }
         }
 
